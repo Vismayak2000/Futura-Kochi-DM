@@ -150,6 +150,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  const placementViewMore = document.getElementById("placement-view-more");
+  if (placementViewMore) {
+    const extraPlacements = Array.from(document.querySelectorAll("#placement-grid .is-extra"));
+
+    placementViewMore.addEventListener("click", function () {
+      const shouldShow = placementViewMore.getAttribute("aria-expanded") !== "true";
+
+      extraPlacements.forEach(function (card) {
+        card.hidden = !shouldShow;
+      });
+
+      placementViewMore.setAttribute("aria-expanded", String(shouldShow));
+      placementViewMore.textContent = shouldShow ? "Show Fewer Placements" : "View All 90 Placements";
+    });
+  }
+
   const carousel = document.querySelector(".testimonial-carousel");
   if (carousel) {
     const slides = Array.from(carousel.querySelectorAll(".testimonial-slide"));
@@ -229,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.querySelectorAll("[data-whatsapp-cta]").forEach(function (link) {
-    const message = link.dataset.whatsappMessage || "Hello Futura Labs, I am interested in the Digital Marketing Training in Kochi. Please share the course details, syllabus, fees, and upcoming batch information.";
+    const message = link.dataset.whatsappMessage || "Hello Futura Labs, I am interested in the Digital Marketing Training in Kochi. Please share the course details.";
     link.href = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
   });
 
@@ -242,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("enquiry-form");
 
   if (form) {
-    const APPS_SCRIPT_URL = "";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznZhtP7dCZuSMvN3gkkN-tuCzHn0Nyxm9qISwU0YAZsSGdZGA2uvA8SXbp7NFdv/exec";
 
     const errorIds = {
       fullName: "full-name-error",
